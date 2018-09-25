@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.itlxw.domain.GoodsBean" table="goods">
+		<id name="gid" column="gid">
+			<generator class="native" />
+		</id>
+		<property name="g_name" column="gName" />
+		<property name="g_price" column="gPrice" />
+		<property name="stock" column="stock" />
+		<property name="imgurl" column="imgurl" />
+		<!-- name表示javabean文件中对应一方的属性,column对应表中的外键 -->
+		<many-to-one name="category" class="com.itlxw.domain.CategoryBean"
+			column="cid" />
+	</class>
+</hibernate-mapping>    

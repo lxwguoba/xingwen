@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.itlxw.domain.SessionInfo" table="wx_session">
+		<id name="sid" column="sid">
+			<generator class="native" />
+		</id>
+		<property name="session_key" column="session_key" />
+		<property name="expires_in" column="expires_in" />
+		<property name="openid" column="openid" />
+	</class>
+</hibernate-mapping>  
+    

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.itlxw.domain.UserBean" table="user">
+		<id name="u_id" column="u_id">
+			<generator class="native" />
+		</id>
+		<property name="u_name" column="u_name" />
+		<property name="u_session_key" column="u_session_key" />
+		<property name="u_expires_in" column="u_expires_in" />
+		<property name="u_openid" column="u_openid" />
+		<property name="u_address" column="u_address" />
+		<property name="u_phone" column="u_phone" />
+		<property name="u_register_time" column="u_register_time" />
+		<property name="u_image_url" column="u_image_url" />
+		<property name="u_gender" column="u_gender" />
+		<property name="code" column="code" />
+	</class>
+</hibernate-mapping>  
+    

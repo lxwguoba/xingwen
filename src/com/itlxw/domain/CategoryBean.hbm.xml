@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.itlxw.domain.CategoryBean" table="cat">
+		<id name="cateID" column="cateID">
+			<generator class="native" />
+		</id>
+		<property name="cateName" column="cateName" />
+		<!-- 一方的配置，配置多方 name参考实体类中的属性字段 column参考数据库表中的字段 cascade设置级联保存，级联删除，inverse放弃主键的维护权，它们都是有方向的,可以设置在不同的方， 
+			cascade="save-update,delete" inverse="true" -->
+			
+		<set name="goodslist" sort="unsorted" inverse="false" mutable="true"
+			optimistic-lock="true" embed-xml="true">
+			<!-- column参考数据库表中的字段 cid为外键的名称 -->
+			<key column="cid" on-delete="noaction" />
+			<!-- class为多的那一方的全路径 -->
+			<one-to-many class="com.itlxw.domain.GoodsBean"
+				not-found="exception" embed-xml="true" />
+		</set>
+	</class>
+</hibernate-mapping>    

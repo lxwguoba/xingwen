@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.itlxw.domain.OrderBean" table="orderInfo">
+		<id name="o_id" column="o_id">
+			<generator class="native" />
+		</id>
+		<property name="o_number" column="o_number" />
+		<property name="o_create_time" column="o_create_time" />
+		<property name="o_receptionist" column="o_receptionist" />
+		<property name="o_all_price" column="o_all_price" />
+		<property name="o_discount_price" column="o_discount_price" />
+		<property name="o_discount" column="o_discount" />
+		<property name="o_customer" column="o_customer" />
+		<property name="o_payStatus" column="o_payStatus" />
+		<!-- 一方的配置，配置多方 name参考实体类中的属性字段 column参考数据库表中的字段 cascade设置级联保存，级联删除，inverse放弃主键的维护权，它们都是有方向的,可以设置在不同的方， 
+			fetch="join" cascade="save-update,delete" inverse="true" -->
+		<set name="goods"  cascade="save-update">
+			<!-- column参考数据库表中的字段 cid为外键的名称 -->
+			<key column="goid" />
+			<!--class为多的那一方的全路径 -->
+			<one-to-many class="com.itlxw.domain.OrderGoodsBean"   />
+		</set>
+		<many-to-one name="user" class="com.itlxw.domain.UserBean" column="u_o_id"/>
+	</class>
+
+</hibernate-mapping>    

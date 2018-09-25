@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- 编写bean，名称都是固定，加载hibernate.cfg.xml的配置文件 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+
+	<!-- 先配置平台事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 开启事务的注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 以后：Dao都需要继承HibernateDaoSupport，注入sessionFactory -->
+	<bean id="peopleFaceDao" class="com.itlxw.dao.PeopleFaceDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="peopleFaceService" class="com.itlxw.service.PeopleFaceServiceImpl">
+		<property name="peopleFaceDao" ref="peopleFaceDao"></property>
+
+	</bean>
+	<!--77777777777777777777777777 -->
+	<!-- scope="prototype"这个是多列 -->
+	<bean id="categoryAction" class="com.itlxw.web.action.CategoryAction"
+		scope="prototype">
+		<property name="categoryService" ref="categoryService"></property>
+	</bean>
+
+	<bean id="categoryService" class="com.itlxw.service.CategoryServiceImpl">
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+
+	<bean id="categoryDao" class="com.itlxw.dao.CategoryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!--77777777777777777777777777 -->
+
+	<!--8888888888888888888888888888888 -->
+	<!-- scope="prototype"这个是多列 -->
+	<bean id="addGoodsAction" class="com.itlxw.web.action.AddGoodsAction"
+		scope="prototype">
+		<property name="addGoodsService" ref="addGoodsService"></property>
+	</bean>
+
+	<bean id="addGoodsService" class="com.itlxw.service.AddGoodsServiceImpl">
+		<property name="addGoodsDao" ref="addGoodsDao"></property>
+	</bean>
+
+	<bean id="addGoodsDao" class="com.itlxw.dao.AddGoodsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!--8888888888888888888888888888888 -->
+
+	<!-- 999999999999999999999 -->
+	<bean id="createOrderAction" class="com.itlxw.web.action.CreateOrderAction"
+		scope="prototype">
+		<property name="addGoodsService" ref="addGoodsService"></property>
+		<property name="createOrderService" ref="createOrderService"></property>
+		<property name="userBeanService" ref="userBeanService"></property>
+	</bean>
+	<bean id="createOrderService" class="com.itlxw.service.CreateOrderServiceImpl">
+		<property name="createOrderDao" ref="createOrderDao"></property>
+		
+	</bean>
+
+	<bean id="createOrderDao" class="com.itlxw.dao.CreateOrderDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 9999999999999999999 -->
+
+
+	<!-- 10101010101010101010101010 -->
+	<bean id="userBeanAction" class="com.itlxw.web.action.UserBeanAction"
+		scope="prototype">
+		<property name="userBeanService" ref="userBeanService"></property>
+	</bean>
+	<bean id="userBeanService" class="com.itlxw.service.UserBeanServiceImpl">
+		<property name="userBeanDao" ref="userBeanDao"></property>
+	</bean>
+
+	<bean id="userBeanDao" class="com.itlxw.dao.UserBeanDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 10101010101010101010101010 -->
+	
+	<!-- 11111111111111111111111111111-->
+	<bean id="userHeadImg" class="com.itlxw.web.action.UserHeadImg"
+		scope="prototype">
+		<property name="userBeanService" ref="userBeanService"></property>
+		<property name="uheadService" ref="uheadService"></property>
+	</bean>
+	<bean id="uheadService" class="com.itlxw.service.UserHeadImgServiceImpl">
+		<property name="uheadDao" ref="uheadDao"></property>
+	</bean>
+
+	<bean id="uheadDao" class="com.itlxw.dao.UserHeadImgDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 11111111111111111111111111111 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<bean id="peopleFaceAction" class="com.itlxw.web.action.PeopleFaceAction"
+		scope="prototype">
+		<property name="peopleFaceService" ref="peopleFaceService"></property>
+	</bean>
+
+	<bean id="smallProgramDao" class="com.itlxw.dao.SmallProgramDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- scope="prototype"这个是多列 -->
+	<bean id="smallProgramService" class="com.itlxw.service.SmallProgramServiceImpl">
+		<property name="smallProgramDao" ref="smallProgramDao"></property>
+	</bean>
+	<!-- scope="prototype"这个是多列 -->
+	<bean id="smallProgramAction" class="com.itlxw.web.action.SmallProgramAction"
+		scope="prototype">
+		<property name="smallProgramService" ref="smallProgramService"></property>
+	</bean>
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
